@@ -74,10 +74,10 @@ namespace NaryTreeDavid
             }
         }
 
-        public List<T> traverseNodes()
+        public List<T> traverseNodes(Tree<T> tree)
         {
             List<T> values = null;
-            foreach(TreeNode<T> node in nodeList)
+            foreach(TreeNode<T> node in tree.nodeList)
             {
                 values.Add(node.value);
                 Console.Write(node.value);
