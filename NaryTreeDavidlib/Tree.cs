@@ -76,29 +76,29 @@ namespace NaryTreeDavid
 
         public List<T> traverseNodes(Tree<T> tree)
         {
-            List<T> values = null;
+            List<T> values = new List<T>();
             foreach(TreeNode<T> node in tree.nodeList)
             {
                 values.Add(node.value);
-                Console.Write(node.value);
             }
             return values;
         }
 
         public List<T> sumToLeafs(List<TreeNode<T>> leafList)
         {
-            List<T> leafSums = null;
+            List<T> leafSums = new List<T>();
             TreeNode<T> noot;
 
             for(int i = 0; i < leafList.Count; i++)
             {
                 noot = leafList[i];
-                dynamic tempValue = noot.value;
+                dynamic tempValue = 0;
                 while(noot.parent != null)
                 {
                     tempValue = tempValue + noot.value;
                     noot = noot.parent;
                 }
+                tempValue = tempValue + noot.value;
                 leafSums.Add(tempValue);
             }
 

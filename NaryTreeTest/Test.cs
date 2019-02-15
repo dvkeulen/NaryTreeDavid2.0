@@ -16,19 +16,19 @@ namespace NaryTreeTest
         public void addChildNodeTestInt()
         {
             // Arrange
-            Tree<int> Tree = new Tree<int>(3);
+            Tree<int> Boom = new Tree<int>(3);
 
             // Act
-            TreeNode<int> node1 = Tree.addChildNode(1, Tree.root);
-            TreeNode<int> node2 = Tree.addChildNode(4, node1);
-            TreeNode<int> node3 = Tree.addChildNode(1, Tree.root);
-            TreeNode<int> node4 = Tree.addChildNode(5, node3);
+            TreeNode<int> node1 = Boom.addChildNode(1, Boom.root);
+            TreeNode<int> node2 = Boom.addChildNode(4, node1);
+            TreeNode<int> node3 = Boom.addChildNode(1, Boom.root);
+            TreeNode<int> node4 = Boom.addChildNode(5, node3);
 
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(Tree.root.children.Contains(node1));
-                Assert.That(Tree.root.children.Contains(node3));
+                Assert.That(Boom.root.children.Contains(node1));
+                Assert.That(Boom.root.children.Contains(node3));
                 Assert.That(node1.children.Contains(node2));
                 Assert.That(node3.children.Contains(node4));
             });
@@ -39,19 +39,19 @@ namespace NaryTreeTest
         public void addChildNodeTestStr()
         {
             // Arrange
-            Tree<string> Tree = new Tree<string>("bomen");
+            Tree<string> Boom = new Tree<string>("bomen");
 
             // Act
-            TreeNode<string> node1 = new TreeNode<string>("zijn", Tree.root);
-            TreeNode<string> node2 = new TreeNode<string>("relax", node1);
-            TreeNode<string> node3 = new TreeNode<string>("vet", Tree.root);
-            TreeNode<string> node4 = new TreeNode<string>("relax", node3);
+            TreeNode<string> node1 = Boom.addChildNode("zijn", Boom.root);
+            TreeNode<string> node2 = Boom.addChildNode("relax", node1);
+            TreeNode<string> node3 = Boom.addChildNode("vet", Boom.root);
+            TreeNode<string> node4 = Boom.addChildNode("relax", node3);
 
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(Tree.root.children.Contains(node1));
-                Assert.That(Tree.root.children.Contains(node3));
+                Assert.That(Boom.root.children.Contains(node1));
+                Assert.That(Boom.root.children.Contains(node3));
                 Assert.That(node1.children.Contains(node2));
                 Assert.That(node3.children.Contains(node4));
             });
@@ -111,9 +111,9 @@ namespace NaryTreeTest
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(leafSums[0] == 7);
-                Assert.That(leafSums[1] == 9);
-                Assert.That(leafSums[2] == 10);
+                Assert.That(leafSums.Contains(7));
+                Assert.That(leafSums.Contains(9));
+                Assert.That(leafSums.Contains(10));
             });
         }
 
@@ -136,15 +136,15 @@ namespace NaryTreeTest
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(leafSums[0] == "DBA");
-                Assert.That(leafSums[1] == "FEBA");
-                Assert.That(leafSums[2] == "CA");
+                Assert.That(leafSums.Contains("0DBA"));
+                Assert.That(leafSums.Contains("0FEBA"));
+                Assert.That(leafSums.Contains("0CA"));
             });
         }
 
-        // test traversenodes
+        // test traversenodes string
         [TestCase]
-        public void traverseNodes()
+        public void traverseNodesStr()
         {
             // Arrange
             Tree<string> Boom = new Tree<string>("A");
@@ -160,11 +160,39 @@ namespace NaryTreeTest
             // Assert
             Assert.Multiple(() =>
             {
+                Assert.That(travList.Contains("A"));
                 Assert.That(travList.Contains("B"));
                 Assert.That(travList.Contains("C"));
                 Assert.That(travList.Contains("E"));
                 Assert.That(travList.Contains("F"));
                 Assert.That(travList.Contains("C"));
+            });
+        }
+
+        // test traversenodes int
+        [TestCase]
+        public void traverseNodesInt()
+        {
+            // Arrange
+            Tree<int> Tree = new Tree<int>(1);
+            TreeNode<int> node1 = Tree.addChildNode(2, Tree.root);
+            TreeNode<int> node2 = Tree.addChildNode(4, node1);
+            TreeNode<int> node3 = Tree.addChildNode(3, Tree.root);
+            TreeNode<int> node4 = Tree.addChildNode(5, node3);
+            TreeNode<int> node5 = Tree.addChildNode(6, node3);
+
+            // Act
+            List<int> travList = Tree.traverseNodes(Tree);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(travList.Contains(1));
+                Assert.That(travList.Contains(2));
+                Assert.That(travList.Contains(4));
+                Assert.That(travList.Contains(3));
+                Assert.That(travList.Contains(5));
+                Assert.That(travList.Contains(6));
             });
         }
     }
